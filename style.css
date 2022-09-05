@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+}
+
+#firstSection{
+    background-image: url("assets/img/sky.jpg");
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#firstText{
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    right: 20%;
+    z-index: 5;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 70px;
+    color: rgb(80, 219, 133);
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    
+}
+
+.leafs{
+    /* width: 100%;
+    max-height: 100%; */
+}
+
+#leafs1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 120vw;
+}
+
+#leafs2{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+}
