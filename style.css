@@ -1,5 +1,7 @@
 body{
     margin: 0;
+    width: 100vw;
+    overflow: hidden;
 }
 
 #firstSection{
@@ -20,7 +22,7 @@ body{
     font-size: 70px;
     color: rgb(80, 219, 133);
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-    
+    opacity: 1;
 }
 
 .leafs{
@@ -33,7 +35,8 @@ body{
     top: 0;
     left: 0;
     height: 100vh;
-    width: 120vw;
+    /* width: 110vw; */
+    transition: 0.5s;
 }
 
 #leafs2{
@@ -41,4 +44,6 @@ body{
     top: 0;
     right: 0;
     height: 100vh;
+    transition: 0.5s;
+
 }
