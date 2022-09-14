@@ -4,8 +4,8 @@ var scrollValueBefore = 0;
 var firstTextValue = 1;
 
 // Get document elements
-var leafs1 = document.getElementById("leafs1");
-var leafs2 = document.getElementById("leafs2");
+var leafLeft = document.getElementById("leafLeft");
+var leafRight = document.getElementById("leafRight");
 var firstText = document.getElementById("firstText");
 var body = document.body;
 
@@ -17,16 +17,16 @@ addEventListener('wheel', (e) => {
     
     console.log(scrollValue);
     // Set leafs position values
-    let leafs1Value = scrollValue / 2; // Divide so the value wont become too high
-    let leafs2Value = leafs1Value - (leafs1Value + (leafs1Value * 2)) // Get a positive value (instead of negative)
+    let leafLeftValue = scrollValue / 2; // Divide so the value wont become too high
+    let leafRightValue = leafLeftValue - (leafLeftValue + (leafLeftValue * 2)) // Get a positive value (instead of negative)
    
     // Set text opacity depending of we are scrolling up or down
     scrollValue < scrollValueBefore ? firstTextValue -= 0.1 : firstTextValue += 0.1;
 
     // If we are scrolling down then give new styling values to elements
     if(scrollValue < 0) {
-        leafs1.style.transform = "translateX(" + leafs1Value + "px)"
-        leafs2.style.transform = "translateX(" + leafs2Value + "px)"
+        leafLeft.style.transform = "translateX(" + leafLeftValue + "px)"
+        leafRight.style.transform = "translateX(" + leafRightValue + "px)"
         firstText.style.opacity = firstTextValue
 
     } else {

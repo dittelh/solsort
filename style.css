@@ -1,3 +1,8 @@
+@font-face {
+    font-family: berlin;
+    src: url("assets/font/berlin.TTF");
+}
+
 body{
     margin: 0;
     width: 100vw;
@@ -14,36 +19,44 @@ body{
 
 #firstText{
     position: absolute;
-    top: 40%;
-    left: 20%;
-    right: 20%;
+    top: 35%;
+    left: 30%;
+    right: 30%;
     z-index: 5;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: 70px;
-    color: rgb(80, 219, 133);
+    font-family: berlin;
+    font-size: 100px;
+    color: #819A00;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     opacity: 1;
 }
 
-.leafs{
-    /* width: 100%;
-    max-height: 100%; */
+#nest{
+    position: absolute;
+    right: 0;
+    z-index: 1;
 }
 
-#leafs1{
+/* .leafs{
+    width: 100%;
+    max-height: 100%;
+} */
+
+#leafLeft{
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 110vh;
     /* width: 110vw; */
     transition: 0.5s;
+    z-index: 2;
 }
 
-#leafs2{
+#leafRight{
     position: absolute;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 110vh;
     transition: 0.5s;
+    z-index: 2;
 
 }
