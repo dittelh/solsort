@@ -4,13 +4,14 @@
 }
 
 html{
-    width: 100vw;
+    width: 100%;
 }
 
 body{
     margin: 0;
-    width: 100vw;
-    overflow: hidden;
+    width: 100%;
+    /* overflow-x: hidden;
+	overflow-y: hidden; */
 }
 
 /* Style the header: fixed position (always stay at the top) */
@@ -18,12 +19,12 @@ body{
     position: fixed;
     top: 0;
     z-index: 10;
-    width: 100%;
+    width: 100vw;
     background-color: #f1f1f1;
 }
 
 .progress-container {
-    width: 100%;
+    width: 100vw;
     height: 8px;
     background: #ccc;
 }
@@ -35,12 +36,24 @@ body{
     width: 0%;
 }
 
+
+/* Section 1 */
+
 #firstSection{
     background-image: url("assets/img/sky.jpg");
     display: flex;
     width: 100vw;
     height: 100vh;
     position: relative;
+}
+
+#blackBox{
+	background-color: #000;
+	height: 100vh;
+	width: 100vw;
+	z-index: 4;
+	opacity: 0.8;
+	overflow: hidden;
 }
 
 #firstText{
@@ -88,7 +101,20 @@ body{
 }
 
 
+
+/* Section 2 */
+
+#secondSection{
+	margin-top: 10%;
+	opacity: 0;
+}
+
+#didYouKnow{
+	text-align: center;
+}
+
 /* Card stack */
+/* Inspiration from https://codepen.io/bramus/pen/PobmGme */
 :root {
 	--card-height: 40vw;
 	--card-margin: 4vw;
@@ -98,6 +124,7 @@ body{
 }
 
 #cards {
+	padding: 5%;
 	padding-bottom: calc(var(--numcards) * var(--card-top-offset)); /* Make place at bottom, as items will slide to that position*/
 	margin-bottom: var(--card-margin); /* Don't include the --card-margin in padding, as that will affect the scroll-timeline*/
 }
@@ -124,85 +151,6 @@ body{
 	padding-top: calc(var(--index) * var(--card-top-offset));
 }
 
-@supports (animation-timeline: works) {
-
-	@scroll-timeline cards-element-scrolls-in-body {
-		source: selector(body);
-		scroll-offsets:
-			/* Start when the start edge touches the top of the scrollport */
-			selector(#cards) start 1,
-			/* End when the start edge touches the start of the scrollport */
-			selector(#cards) start 0
-		;
-		start: selector(#cards) start 1; /* Start when the start edge touches the top of the scrollport */
-		end: selector(#cards) start 0; /* End when the start edge touches the start of the scrollport */
-		time-range: 4s;
-	}
-
-	.card {
-		--index0: calc(var(--index) - 1); /* 0-based index */
-		--reverse-index: calc(var(--numcards) - var(--index0)); /* reverse index */
-		--reverse-index0: calc(var(--reverse-index) - 1); /* 0-based reverse index */
-	}
-	
-	.card__content {
-		transform-origin: 50% 0%;
-		will-change: transform;
-
-		--duration: calc(var(--reverse-index0) * 1s);
-		--delay: calc(var(--index0) * 1s);
-
-		animation: var(--duration) linear scale var(--delay) forwards;
-		animation-timeline: cards-element-scrolls-in-body;
-	}
-
-	@keyframes scale {
-		to {
-			transform:
-				scale(calc(
-					1.1
-					-
-					calc(0.1 * var(--reverse-index))
-				));
-		}
-	}
-}
-
-/** DEBUG **/
-
-#debug {
-  position: fixed;
-  top: 1em;
-  left: 1em;
-}
-#debug::after {
-  content: " Show Debug";
-  margin-left: 1.5em;
-  color: white;
-  white-space: nowrap;
-}
-
-#debug:checked ~ main {
-  --outline-width: 1px;
-}
-
-
-/** PAGE STYLING **/
-
-* { /* Poor Man's Reset */
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-/* body {
-	background: rgb(58 29 43);
-	color: rgb(255, 255, 255);
-	text-align: center;
-
-	font-size: calc(1em + 0.5vw);
-} */
-
 header,
 main {
 	width: 80vw;
@@ -217,8 +165,7 @@ header {
 
 #cards {
 	list-style: none;
-	outline: calc(var(--outline-width) * 10) solid blue;
-	
+	outline: calc(var(--outline-width) * 10);
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: repeat(var(--numcards), var(--card-height));
@@ -226,7 +173,7 @@ header {
 }
 
 .card {
-	outline: var(--outline-width) solid hotpink;
+	outline: var(--outline-width);
 }
 
 .card__content {
@@ -235,14 +182,12 @@ header {
 	color: rgb(10, 5, 7);
 	border-radius: 1em;
 	overflow: hidden;
-
 	display: grid;
 	grid-template-areas: "text img";
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto;
-
 	align-items: stretch;
-	outline: var(--outline-width) solid lime;
+	outline: var(--outline-width);
 }
 
 .card__content > div {
@@ -250,7 +195,6 @@ header {
 	width: 80%;
 	place-self: center;
 	text-align: left;
-
 	display: grid;
 	gap: 1em;
 	place-items: start;
@@ -281,4 +225,14 @@ p {
 	font-family: sans-serif;
 	font-weight: 300;
 	line-height: 1.42;
+}
+
+
+
+
+
+/* Section 3 */
+
+#waterfall{
+	width: 100vw;
 }

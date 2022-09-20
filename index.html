@@ -14,62 +14,66 @@
         </div>
       </div>
     <section id="firstSection">
+        <div id="blackBox"></div>
         <img class="leafs" id="leafLeft" src="assets/img/leafLeft.png" alt="Blade">
         <h1 id="firstText">En solsorts rejse</h1>
         <img class="leafs" id="leafRight" src="assets/img/leafRight.png" alt="Blade">
         <img id="nest" src="assets/img/nest.png" alt="Fuglerede">
     </section>
     <section id="secondSection">
-        <h2>Vidste du, at...?</h2>
+        <h2 id="didYouKnow">Vidste du, at...?</h2>
         <ul id="cards">
             <li class="card" id="card_1">
-                <div class="card__content">
-                    <div>
-                        <h2>Maks levealder</h2>
-                        <p>En solsort kan blive op til 21 år</p>
-                    </div>
-                    <figure>
-                        <img src="https://codyhouse.co/demo-tutorials/stacking-cards/assets/img/img-1.jpg" alt="Image description">
-                    </figure>
-                </div>
-            </li>
-            <li class="card" id="card_2">
                 <div class="card__content">
                     <div>
                         <h2>Kuldstørrelse</h2>
                         <p>De lægger mellem 3-4 æg per kuld</p>
                     </div>
                     <figure>
-                        <img src="https://codyhouse.co/demo-tutorials/stacking-cards/assets/img/img-2.jpg" alt="Image description">
+                        <img src="assets/img/eggs_nest.jpg" alt="Image description">
                     </figure>
                 </div>
             </li>
-            <li class="card" id="card_3">
+            <li class="card" id="card_2">
                 <div class="card__content">
                     <div>
                         <h2>Fra æg til unge</h2>
                         <p>Solsorte hunnen ruger på æggene mellem 13-15 dage</p>
                     </div>
                     <figure>
-                        <img src="https://codyhouse.co/demo-tutorials/stacking-cards/assets/img/img-3.jpg" alt="Image description">
+                        <img src="assets/img/egg_young.jpg" alt="Image description">
+                    </figure>
+                </div>
+            </li>
+            <li class="card" id="card_3">
+                <div class="card__content">
+                    <div>
+                        <h2>Fra unge til voksen</h2>
+                        <p>En unge bliver på 2 uger voksen</p>
+                    </div>
+                    <figure>
+                        <img src="assets/img/young_adult.jpg" alt="Image description">
                     </figure>
                 </div>
             </li>
             <li class="card" id="card_4">
                 <div class="card__content">
                     <div>
-                        <h2>Fra unge til voksen</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <h2>Gennemsnits levealder</h2>
+                        <p>En solsort lever typisk mellem 5-10 år</p>
                     </div>
                     <figure>
-                        <img src="https://codyhouse.co/demo-tutorials/stacking-cards/assets/img/img-2.jpg" alt="Image description">
+                        <img src="assets/img/oldbird.jpg" alt="Image description">
                     </figure>
                 </div>
             </li>
         </ul>
     </section>
     <section id="thirdSection">
-
+        <video autoplay muted loop id="waterfall">
+            <source src="assets/img/waterfallMP4.MOV" type="video/mp4">
+          </video>
+        <img src="assets/img/boy1.png" alt="">
     </section>
     <section id="fourthSection">
 
@@ -96,5 +100,9 @@
 
     </section>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.min.js" integrity="sha512-RvUydNGlqYJapy0t4AH8hDv/It+zKsv4wOQGb+iOnEfa6NnF2fzjXgRy+FDjSpMfC3sjokNUzsfYZaZ8QAwIxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js" integrity="sha512-5/OHwmQzDSBS0Ous4/hlYoWLHd06/d2r7LdKZQVBXOA6PvOqWVXtdboiLTU7lQTGyVoKVTNkwi0ol4gHGlw5ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script src="script.js"></script>
 </html>
