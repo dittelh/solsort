@@ -233,6 +233,21 @@ p {
 
 /* Section 3 */
 
+.animation{
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+}
+
 #waterfall{
 	width: 100vw;
+}
+
+#solsort{
+	width: 40%;
+	position: absolute;
+	top: 20%; 
+	right: -30%;
+	z-index: 2;
+	/* transform: rotate(180deg) !important; */
 }

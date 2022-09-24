@@ -106,3 +106,44 @@ function myFunction() {
   var scrolled = (winScroll / height) * 100;
   document.getElementById("myBar").style.width = scrolled + "%";
 }
+
+
+
+
+// Section 3
+
+const flightPath = {
+    curviness: 1.25,
+    // autoRotate: true,
+    values: [
+    {x: -100, y: -50},
+    {x: -200, y: 20},
+    {x:-500, y: 100},
+    {x:-800, y: -100},
+    {x:-1100, y: 100},
+    {x:-1300, y: -125},
+    {x:-1600, y: 175},
+    {x: -2300, y: -250},
+    ]
+};
+
+const tween = new TimelineLite();
+
+tween.add(
+    TweenLite.to('#solsort', 1, {
+        bezier: flightPath,
+        ease: Power1.easeInOut
+    })
+);
+
+const controller = new ScrollMagic.Controller();
+
+const scene = new ScrollMagic.Scene({
+    triggerElement: '.animation',
+    duration: 3000,
+    triggerHook: 0,
+})
+.setTween(tween)
+// .addIndicators()
+.setPin('.animation')
+.addTo(controller);
