@@ -251,3 +251,15 @@ p {
 	z-index: 2;
 	/* transform: rotate(180deg) !important; */
 }
+
+
+/* Section 4 */
+
+#feet{
+	z-index: 5;
+	width: 100vw;
+}
+
+#fourthSectionFacts{
+	z-index: 6;
+}
