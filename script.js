@@ -27,7 +27,7 @@ addEventListener('wheel', (e) => {
     scrollValue += e.wheelDelta
     
 
-    console.log(scrollValue);
+    // console.log(scrollValue);
 
     // Set leafs position values
     let leafLeftValue = scrollValue / 2; // Divide so the value wont become too high
@@ -58,7 +58,7 @@ addEventListener('wheel', (e) => {
     if(scrollValue < 0){
         scrollValue < scrollValueBefore ? blackBoxValue -= 0.2 : blackBoxValue += 0.2;
         blackBox.style.opacity = blackBoxValue;
-        console.log(blackBoxValue)
+        // console.log(blackBoxValue)
     } else {
         blackBoxValue = 0.8
     }
@@ -106,6 +106,7 @@ function myFunction() {
   var scrolled = (winScroll / height) * 100;
   document.getElementById("myBar").style.width = scrolled + "%";
 }
+// gsap.registerPlugin()
 
 
 
@@ -113,18 +114,21 @@ function myFunction() {
 // Section 3
 
 const flightPath = {
+
+
     curviness: 1.25,
     // autoRotate: true,
     values: [
-    {x: -100, y: -50},
-    {x: -200, y: 20},
-    {x:-500, y: 100},
-    {x:-800, y: -100},
+    {x: -100, y: -70},
+    {x: -200, y: -50},
+    {x:-500, y: 120},
+    {x:-800, y: -60},
     {x:-1100, y: 100},
-    {x:-1300, y: -125},
+    {x:-1300, y: -115},
     {x:-1600, y: 175},
     {x: -2300, y: -250},
     ]
+
 };
 
 const tween = new TimelineLite();
@@ -147,3 +151,116 @@ const scene = new ScrollMagic.Scene({
 // .addIndicators()
 .setPin('.animation')
 .addTo(controller);
+
+
+
+// Change img src function
+
+var drengSolsort = document.getElementById("solsort");
+var hostname = window.location.protocol + "//" + window.location.hostname;
+
+// Add port for localhost
+if (window.location.hostname === "localhost") {
+  hostname += ":5500";
+}
+
+window.setInterval(changeBirdImg, 200);
+
+function changeBirdImg() {
+    if(drengSolsort.src === hostname + "/assets/img/boy1.png"){
+        drengSolsort.src = hostname + "/assets/img/boy2.png"
+    } else{
+        drengSolsort.src = hostname + "/assets/img/boy1.png"
+    }
+    
+}
+
+
+
+// Section 4
+
+
+var container = document.getElementById('birdsfeet');
+// Set up our animation 
+
+var animData = {
+    container: container,
+    renderer: 'svg',
+    autoplay: true,
+    loop: true,
+    path : 'assets/img/birdsfeet.json'
+};
+var anim = bodymovin.loadAnimation(animData);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// LottieInteractivity.create({
+//     mode: "scroll",
+//     player: "#birdsfeet",
+//     actions: [
+//         {
+//             visibility:[0,1],
+//             type: "seek",
+//             frames: [0,444],
+//         },
+//     ]
+// });
+
+// https://greensock.com/docs/v3/HelperFunctions#lottie d. 26/9-22
+
+// function LottieScrollTrigger(vars) {
+// 	let playhead = {frame: 0},
+// 		target = gsap.utils.toArray(vars.target)[0],
+// 		speeds = {slow: "+=3000", medium: "+=1000", fast: "+=500"},
+// 		st = {trigger: target, pin: true, start: "top top", end: speeds[vars.speed] || "+=500", scrub: 1},
+// 		animation = lottie.loadAnimation({
+// 			container: target,
+// 			renderer: vars.renderer || "svg",
+// 			loop: false,
+// 			autoplay: false,
+// 			path: vars.path
+// 		});
+// 	for (let p in vars) { // let users override the ScrollTrigger defaults
+// 		st[p] = vars[p];
+// 	}
+// 	animation.addEventListener("DOMLoaded", function() {
+// 		gsap.to(playhead, {
+//       duration: vars.duration || 0.5,
+//       delay: vars.delay || 0,
+// 			frame: animation.totalFrames - 1,
+// 			ease: vars.ease || "none",
+// 			onUpdate: () => animation.goToAndStop(playhead.frame, true),
+// 			scrollTrigger: st
+// 		});
+//     // in case there are any other ScrollTriggers on the page and the loading of this Lottie asset caused layout changes
+//     ScrollTrigger.sort();
+//     ScrollTrigger.refresh(); 
+// 	});
+//   return animation;
+// }
+
+// LottieScrollTrigger({
+//     target: "#birdsfeet",
+//     path: "https://lottie.host/fcbb3ebf-aece-45ee-bfa2-469f1643bed1/efYoTgZMmR.json",
+//     speed: "slow",
+//     scrub: 2 // seconds it takes for the playhead to "catch up"
+//     // you can also add ANY ScrollTrigger values here too, like trigger, start, end, onEnter, onLeave, onUpdate, etc. See https://greensock.com/docs/v3/Plugins/ScrollTrigger
+//    });
