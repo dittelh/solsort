@@ -263,7 +263,15 @@ p {
 }
 
 
+#v0 {
+	height: 100vh;
+	width: 100vw;
+	object-fit: cover;
+}
 
+#set-height {
+    display: block;
+}
 
 
 
@@ -296,7 +304,9 @@ p {
 } */
 
 #backgroundRain{
-	background-color: rgb(50, 50, 70);
+	/* background-color: rgb(50, 50, 70); */
+	background: linear-gradient(to bottom, #202020, #111119);
+
 	height: 100vh;
 	z-index: 0;
 	position: relative;
@@ -315,6 +325,15 @@ p {
 	z-index: 1;
 	bottom: 60px;
 	opacity: 0.5;
+  }
+
+  .drop {
+	position: absolute;
+	bottom: 100%;
+	width: 15px;
+	height: 120px;
+	pointer-events: none;
+	animation: drop 0.5s linear infinite;
   }
   
   body.back-row-toggle .rain.back-row {

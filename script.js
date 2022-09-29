@@ -1,9 +1,11 @@
 // Some initial values
 var scrollValue = 0
 var scrollValueBefore = 0;
+var scrollValuePositive = 0;
 var firstTextValue = 1;
 var secondSectionValue = 0;
 var blackBoxValue = 0.8;
+var birdTrackFrames = 0;
 
 // Get document elements
 var leafLeft = document.getElementById("leafLeft");
@@ -12,6 +14,7 @@ var firstText = document.getElementById("firstText");
 var nestImg = document.getElementById("nest");
 var secondSection = document.getElementById("secondSection");
 var blackBox = document.getElementById("blackBox");
+var vid = document.getElementById('v0'); 
 var body = document.body;
 
 window.onbeforeunload = function () {
@@ -25,9 +28,6 @@ addEventListener('wheel', (e) => {
     
     // Get scroll value from event
     scrollValue += e.wheelDelta
-    
-
-    // console.log(scrollValue);
 
     // Set leafs position values
     let leafLeftValue = scrollValue / 2; // Divide so the value wont become too high
@@ -58,7 +58,6 @@ addEventListener('wheel', (e) => {
     if(scrollValue < 0){
         scrollValue < scrollValueBefore ? blackBoxValue -= 0.2 : blackBoxValue += 0.2;
         blackBox.style.opacity = blackBoxValue;
-        // console.log(blackBoxValue)
     } else {
         blackBoxValue = 0.8
     }
@@ -91,13 +90,42 @@ addEventListener('wheel', (e) => {
         body.style.overflowY = "hidden";
     }
 
+
+    // let videoTop = vid.offsetTop;
+    // let videoBottom = vid.offsetTop + vid.offsetHeight;
+    // console.log(videoTop);
+    // console.log(videoBottom)
+    // console.log(window.scrollY)
+    
+    // Bird tracks
+    if(birdTrackFrames > 7100 && window.scrollY > 8200){
+        body.style.overflowY = "unset";
+        birdTrackFrames = 7099;
+    }
+    else if(birdTrackFrames < -10 && window.scrollY > 8200) {
+        body.style.overflowY = "unset";
+        birdTrackFrames = 1;
+    }
+    else if(window.scrollY > 8200 && window.scrollY < 8500 && birdTrackFrames < 7100){
+        body.style.overflowY = "hidden";
+        birdTrackFrames += e.wheelDelta - (e.wheelDelta + e.wheelDelta);
+        window.requestAnimationFrame(scrollPlay);
+    }
+    if(window.scrollY < 8000){
+        birdTrackFrames = 1;
+    }
+    
+
+
+    scrollValuePositive = scrollValue - (scrollValue + scrollValue)
+
     // Save current value so we can check it as the old value next time we scroll
     scrollValueBefore = scrollValue;
 })
 
 
 
-
+// Scrolling bar
 window.onscroll = function() {myFunction()};
 
 function myFunction() {
@@ -178,29 +206,59 @@ function changeBirdImg() {
 
 
 // Section 4
+"use strict";!function(e){"function"==typeof define&&define.amd?define(e):"undefined"!=typeof module&&module.exports?module.exports=e():window.enterView=e.call(this)}(function(){var e=function(e){function n(){g=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.msRequestAnimationFrame||function(e){return setTimeout(e,1e3/60)}}function t(){if(h&&"number"==typeof h){var e=Math.min(Math.max(0,h),1);return q-e*q}return q}function i(){var e=document.documentElement.clientHeight,n=window.innerHeight||0;q=Math.max(e,n)}function o(){y=!1;var e=t();A=A.filter(function(n){var t=n.getBoundingClientRect(),i=t.top,o=i<e;if(o&&!n.__enter_view){if(m(n),_)return!1}else!o&&n.__enter_view&&w&&w(n);return n.__enter_view=o,!0}),A.length||window.removeEventListener("scroll",r,!0)}function r(){y||(y=!0,g(o))}function u(){i(),o()}function f(e){for(var n=e.length,t=[],i=0;i<n;i+=1)t.push(e[i]);return t}function c(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:document;return"string"==typeof e?f(n.querySelectorAll(e)):e instanceof NodeList?f(e):e instanceof Array?e:void 0}function d(){A=c(l)}function a(){window.addEventListener("resize",u,!0),window.addEventListener("scroll",r,!0),u()}function s(){var e=l&&m;e||console.error("must set selector and enter options"),n(),d(),a(),o()}var l=e.selector,m=e.enter,w=e.exit,v=e.offset,h=void 0===v?0:v,p=e.once,_=void 0!==p&&p,g=null,y=!1,A=[],q=0;s()};return e});
+enterView({
+    selector: 'section',
+    enter: function(el) {
+        el.classList.add('entered');
+    }
+})
+
+var frameNumber = 50; // start video at frame 0
+// lower numbers = faster playback
+
+var playbackConst = 500;
+// get page height from video duration
+
+// select video element         
+
+// var vid = $('#v0')[0]; // jquery option
+
+// dynamically set the page height according to video length
+vid.addEventListener('loadedmetadata', function() {
+// setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
+});
 
 
-var container = document.getElementById('birdsfeet');
-// Set up our animation 
+// Use requestAnimationFrame for smooth playback
+function scrollPlay(){  
+// var frameNumber  = window.pageYOffset/playbackConst;
+var frameNumber  = birdTrackFrames/playbackConst;
+vid.currentTime  = frameNumber;
+window.requestAnimationFrame(scrollPlay);
+}
 
-var animData = {
-    container: container,
-    renderer: 'svg',
-    autoplay: true,
-    loop: true,
-    path : 'assets/img/birdsfeet.json'
-};
-var anim = bodymovin.loadAnimation(animData);
+
+
+// var container = document.getElementById('birdsfeet');
+// // Set up our animation 
+
+// var animData = {
+//     container: container,
+//     renderer: 'svg',
+//     autoplay: true,
+//     loop: true,
+//     path : 'assets/img/birdsfeet.json'
+// };
+// var anim = bodymovin.loadAnimation(animData);
 
 
 
 
 
 // Section 7
-// Rain
+// Rain https://codepen.io/arickle/pen/XKjMZY d. 28/9-22
 
-  //clear out everything
-  document.querySelector('.rain').empty();
 
   var increment = 0;
   var drops = "";
@@ -217,31 +275,11 @@ var anim = bodymovin.loadAnimation(animData);
     //add in a new raindrop with various randomizations to certain CSS properties
     drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
     backDrops += '<div class="drop" style="right: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
-  }
+}
+  document.querySelector('.rain.front-row').insertAdjacentHTML("beforeend", drops);
+  document.querySelector('.rain.back-row').insertAdjacentHTML("beforeend", backDrops);
 
-  document.querySelector('.rain.front-row').insertAdjacentHTML("beforeend",drops);
-  document.querySelector('.rain.back-row').insertAdjacentHTML("beforeend",backDrops);
 
-
-document.querySelector('.splat-toggle.toggle').addEventListener('click', function() {
-  document.querySelector('body').classList.toggle('splat-toggle');
-  document.querySelector('.splat-toggle.toggle').classList.toggle('active');
-  makeItRain();
-});
-
-document.querySelector('.back-row-toggle.toggle').addEventListener('click', function() {
-  document.querySelector('body').classList.toggle('back-row-toggle');
-  document.querySelector('.back-row-toggle.toggle').classList.toggle('active');
-  makeItRain();
-});
-
-document.querySelector('.single-toggle.toggle').addEventListener('click', function() {
-  document.querySelector('body').classList.toggle('single-toggle');
-  document.querySelector('.single-toggle.toggle').classList.toggle('active');
-  makeItRain();
-});
-
-makeItRain();
 
 
 
