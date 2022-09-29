@@ -16,8 +16,12 @@ var nestImg = document.getElementById("nest");
 var secondSection = document.getElementById("secondSection");
 var blackBox = document.getElementById("blackBox");
 var vid = document.getElementById('v0'); 
-var sadPhoto = document.getElementById("backgroundRain");
+var sadPhoto = document.getElementById("sadBird");
+var backgroundRain = document.getElementById("backgroundRain");
 var body = document.body;
+var rain0 = "";
+var rain1 = "";
+var rainRemoved = false;
 
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
@@ -130,22 +134,99 @@ addEventListener('wheel', (e) => {
     // console.log(scrollValue)
     // Section 7 - img change
 
-    if(window.scrollY > 9245){
+    if(rain0 === ""){
+        rain0 = document.getElementsByClassName("rain")[0]
+        rain1 = document.getElementsByClassName("rain")[1]
+    }
+
+    if(window.scrollY > 9245 && scrollValueSadBird <= 0){
         scrollValueSadBird += e.wheelDelta;
+        body.style.overflowY = "hidden";
         console.log(scrollValueSadBird)
-    } else {
+    } else if(scrollValueSadBird > 0) {
         scrollValueSadBird = 0;
+        body.style.overflowY = "unset";
+        sadPhoto.src = "assets/img/sadBird/sad0.png"
     }
     
-    if(scrollValue < -15720){
-        sadPhoto.style.backgroundImage = 'url("assets/img/sadBird/sad1.png")';
+    if(scrollValueSadBird < -240){
+        sadPhoto.src = "assets/img/sadBird/sad1.png"
     } 
-    if(scrollValue < -2700){
-        nestImg.src = "assets/img/nestOpen.png"
+    if(scrollValueSadBird < -360){
+        sadPhoto.src = "assets/img/sadBird/sad2.png"
     }
-    if(scrollValue > -2040){
-        nestImg.src = "assets/img/nest.png"
+    if(scrollValueSadBird < -400){
+        sadPhoto.src = "assets/img/sadBird/sad3.png"
     } 
+    if(scrollValueSadBird < -440){
+        sadPhoto.src = "assets/img/sadBird/sad4.png"
+    } 
+    if(scrollValueSadBird < -480){
+        sadPhoto.src = "assets/img/sadBird/sad5.png"
+    } 
+    if(scrollValueSadBird < -600){
+        sadPhoto.src = "assets/img/sadBird/sad6.png"
+    } 
+    if(scrollValueSadBird < -700){
+        sadPhoto.src = "assets/img/sadBird/sad7.png"
+    } 
+    if(scrollValueSadBird < -800){
+        sadPhoto.src = "assets/img/sadBird/sad8.png"
+    } 
+    if(scrollValueSadBird < -900){
+        sadPhoto.src = "assets/img/sadBird/sad9.png"
+    } 
+    if(scrollValueSadBird < -1000){
+        sadPhoto.src = "assets/img/sadBird/sad10.png"
+        console.log(rain0);
+
+        if(rainRemoved){
+            backgroundRain.appendChild(rain0)
+            backgroundRain.appendChild(rain1)
+
+            rainRemoved = false;
+        }
+    } 
+    if(scrollValueSadBird < -1500){
+        sadPhoto.src = "assets/img/idea.jpg"
+
+        if(!rainRemoved){
+            rain0.remove();
+            rain1.remove();
+
+            rainRemoved = true;
+        }
+    }
+    if(scrollValueSadBird < -2000){
+        sadPhoto.src = "assets/img/singing/singing1.png"
+    } 
+    if(scrollValueSadBird < -2100){
+        sadPhoto.src = "assets/img/singing/singing2.png"
+    } 
+    if(scrollValueSadBird < -2200){
+        sadPhoto.src = "assets/img/singing/singing3.png"
+    } 
+    if(scrollValueSadBird < -2300){
+        sadPhoto.src = "assets/img/singing/singing4.png"
+    } 
+    if(scrollValueSadBird < -2400){
+        sadPhoto.src = "assets/img/singing/singing5.png"
+    }
+    if(scrollValueSadBird < -2500){
+        sadPhoto.src = "assets/img/singing/singing1.png"
+    } 
+    if(scrollValueSadBird < -2600){
+        sadPhoto.src = "assets/img/singing/singing2.png"
+    } 
+    if(scrollValueSadBird < -2700){
+        sadPhoto.src = "assets/img/singing/singing3.png"
+    } 
+    if(scrollValueSadBird < -2800){
+        sadPhoto.src = "assets/img/singing/singing4.png"
+    } 
+    if(scrollValueSadBird < -2900){
+        sadPhoto.src = "assets/img/singing/singing5.png"
+    }  
 })
 
 
@@ -264,11 +345,11 @@ window.requestAnimationFrame(scrollPlay);
 // Rain https://codepen.io/arickle/pen/XKjMZY d. 28/9-22
 
 
-  var increment = 0;
-  var drops = "";
-  var backDrops = "";
+var increment = 0;
+var drops = "";
+var backDrops = "";
 
-  while (increment < 100) {
+while (increment < 100) {
     //couple random numbers to use for various randomizations
     //random number between 98 and 1
     var randoHundo = (Math.floor(Math.random() * (98 - 1 + 1) + 1));
@@ -280,11 +361,14 @@ window.requestAnimationFrame(scrollPlay);
     drops += '<div class="drop" style="left: ' + increment + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
     backDrops += '<div class="drop" style="right: ' + increment + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
 }
-  document.querySelector('.rain.front-row').insertAdjacentHTML("beforeend", drops);
-  document.querySelector('.rain.back-row').insertAdjacentHTML("beforeend", backDrops);
+document.querySelector('.rain.front-row').insertAdjacentHTML("beforeend", drops);
+document.querySelector('.rain.back-row').insertAdjacentHTML("beforeend", backDrops);
 
 
-
+function playSound(){
+    var music = new Audio('assets/img/birdsong.mp3');
+    music.play();
+}
 
 
 
