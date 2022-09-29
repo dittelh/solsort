@@ -6,6 +6,7 @@ var firstTextValue = 1;
 var secondSectionValue = 0;
 var blackBoxValue = 0.8;
 var birdTrackFrames = 0;
+var scrollValueSadBird = 0;
 
 // Get document elements
 var leafLeft = document.getElementById("leafLeft");
@@ -15,6 +16,7 @@ var nestImg = document.getElementById("nest");
 var secondSection = document.getElementById("secondSection");
 var blackBox = document.getElementById("blackBox");
 var vid = document.getElementById('v0'); 
+var sadPhoto = document.getElementById("backgroundRain");
 var body = document.body;
 
 window.onbeforeunload = function () {
@@ -97,6 +99,7 @@ addEventListener('wheel', (e) => {
     // console.log(videoBottom)
     // console.log(window.scrollY)
     
+    console.log(window.scrollY)
     // Bird tracks
     if(birdTrackFrames > 7100 && window.scrollY > 8200){
         body.style.overflowY = "unset";
@@ -121,6 +124,28 @@ addEventListener('wheel', (e) => {
 
     // Save current value so we can check it as the old value next time we scroll
     scrollValueBefore = scrollValue;
+
+
+
+    // console.log(scrollValue)
+    // Section 7 - img change
+
+    if(window.scrollY > 9245){
+        scrollValueSadBird += e.wheelDelta;
+        console.log(scrollValueSadBird)
+    } else {
+        scrollValueSadBird = 0;
+    }
+    
+    if(scrollValue < -15720){
+        sadPhoto.style.backgroundImage = 'url("assets/img/sadBird/sad1.png")';
+    } 
+    if(scrollValue < -2700){
+        nestImg.src = "assets/img/nestOpen.png"
+    }
+    if(scrollValue > -2040){
+        nestImg.src = "assets/img/nest.png"
+    } 
 })
 
 
@@ -214,15 +239,9 @@ enterView({
     }
 })
 
-var frameNumber = 50; // start video at frame 0
-// lower numbers = faster playback
+// var frameNumber = 50; 
 
 var playbackConst = 500;
-// get page height from video duration
-
-// select video element         
-
-// var vid = $('#v0')[0]; // jquery option
 
 // dynamically set the page height according to video length
 vid.addEventListener('loadedmetadata', function() {
@@ -237,21 +256,6 @@ var frameNumber  = birdTrackFrames/playbackConst;
 vid.currentTime  = frameNumber;
 window.requestAnimationFrame(scrollPlay);
 }
-
-
-
-// var container = document.getElementById('birdsfeet');
-// // Set up our animation 
-
-// var animData = {
-//     container: container,
-//     renderer: 'svg',
-//     autoplay: true,
-//     loop: true,
-//     path : 'assets/img/birdsfeet.json'
-// };
-// var anim = bodymovin.loadAnimation(animData);
-
 
 
 
@@ -273,8 +277,8 @@ window.requestAnimationFrame(scrollPlay);
     //increment
     increment += randoFiver;
     //add in a new raindrop with various randomizations to certain CSS properties
-    drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
-    backDrops += '<div class="drop" style="right: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+    drops += '<div class="drop" style="left: ' + increment + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+    backDrops += '<div class="drop" style="right: ' + increment + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
 }
   document.querySelector('.rain.front-row').insertAdjacentHTML("beforeend", drops);
   document.querySelector('.rain.back-row').insertAdjacentHTML("beforeend", backDrops);
