@@ -68,8 +68,8 @@ body {
 #firstText{
     position: absolute;
     top: 35%;
-    left: 30%;
-    right: 30%;
+    left: 27%;
+    right: 25%;
     z-index: 5;
     font-family: berlin;
     font-size: 100px;
@@ -82,6 +82,7 @@ body {
     position: absolute;
     right: 0;
     z-index: 1;
+	width: 100vw;
 }
 
 /* .leafs{
