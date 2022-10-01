@@ -148,7 +148,7 @@ addEventListener('wheel', (e) => {
     var sadBirdProgress = sadBirdScene.progress();
 
     // Amount if different images in this scene
-    birdImages = 22;
+    var birdImages = 22;
 
     if(sadBirdProgress <= ( 1 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad0.png";
