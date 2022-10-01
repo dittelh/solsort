@@ -23,11 +23,15 @@ var rain0 = "";
 var rain1 = "";
 var rainRemoved = false;
 
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
+// ScrollMagic
+const controller = new ScrollMagic.Controller();
+
+onbeforeunload = function () {
+    scrollTo(0, 0);
   }
 body.style.overflowX = "hidden";
 body.style.overflowY = "hidden";
+
 
 // Do something when scrolling
 addEventListener('wheel', (e) => {
@@ -101,24 +105,24 @@ addEventListener('wheel', (e) => {
     // let videoBottom = vid.offsetTop + vid.offsetHeight;
     // console.log(videoTop);
     // console.log(videoBottom)
-    // console.log(window.scrollY)
+    // console.log(scrollY)
     
-    console.log(window.scrollY)
+    // console.log(scrollY)
     // Bird tracks
-    if(birdTrackFrames > 7100 && window.scrollY > 8200){
+    if(birdTrackFrames > 7100 && scrollY > 8200){
         body.style.overflowY = "unset";
         birdTrackFrames = 7099;
     }
-    else if(birdTrackFrames < -10 && window.scrollY > 8200) {
+    else if(birdTrackFrames < -10 && scrollY > 8200) {
         body.style.overflowY = "unset";
         birdTrackFrames = 1;
     }
-    else if(window.scrollY > 8200 && window.scrollY < 8500 && birdTrackFrames < 7100){
+    else if(scrollY > 8200 && scrollY < 8500 && birdTrackFrames < 7100){
         body.style.overflowY = "hidden";
         birdTrackFrames += e.wheelDelta - (e.wheelDelta + e.wheelDelta);
-        window.requestAnimationFrame(scrollPlay);
+        requestAnimationFrame(scrollPlay);
     }
-    if(window.scrollY < 8000){
+    if(scrollY < 8000){
         birdTrackFrames = 1;
     }
     
@@ -130,55 +134,65 @@ addEventListener('wheel', (e) => {
     scrollValueBefore = scrollValue;
 
 
-
-    // console.log(scrollValue)
     // Section 7 - img change
 
+    // console.log(isElementInViewport(sadPhoto));
     if(rain0 === ""){
         rain0 = document.getElementsByClassName("rain")[0]
         rain1 = document.getElementsByClassName("rain")[1]
     }
 
-    if(window.scrollY > 9245 && scrollValueSadBird <= 0){
-        scrollValueSadBird += e.wheelDelta;
-        body.style.overflowY = "hidden";
-        console.log(scrollValueSadBird)
-    } else if(scrollValueSadBird > 0) {
-        scrollValueSadBird = 0;
-        body.style.overflowY = "unset";
-        sadPhoto.src = "assets/img/sadBird/sad0.png"
+    var sadBirdProgress = scene1.progress();
+    console.log(sadBirdProgress)
+
+    birdImages = 22;
+
+
+    // if(scrollY > 9245 && scrollValueSadBird <= 0){
+    //     scrollValueSadBird += e.wheelDelta;
+    //     // body.style.overflowY = "hidden";
+    // } else if(scrollValueSadBird > 0) {
+    //     scrollValueSadBird = 0;
+    //     // body.style.overflowY = "unset";
+    //     sadPhoto.src = "assets/img/sadBird/sad0.png"
+    // }
+    
+    if(sadBirdProgress <= ( 1 / birdImages)){
+        console.log("sad0")
+        sadPhoto.src = "assets/img/sadBird/sad0.png";
     }
     
-    if(scrollValueSadBird < -240){
+    else if(sadBirdProgress <= ( 2 / birdImages)){
+        console.log("sad1")
         sadPhoto.src = "assets/img/sadBird/sad1.png"
     } 
-    if(scrollValueSadBird < -360){
+    else if(sadBirdProgress <= ( 3 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad2.png"
     }
-    if(scrollValueSadBird < -400){
+    else if(sadBirdProgress <= ( 4 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad3.png"
     } 
-    if(scrollValueSadBird < -440){
+    else if(sadBirdProgress <= ( 5 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad4.png"
     } 
-    if(scrollValueSadBird < -480){
+    else if(sadBirdProgress <= ( 6 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad5.png"
     } 
-    if(scrollValueSadBird < -600){
+    else if(sadBirdProgress <= ( 7 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad6.png"
     } 
-    if(scrollValueSadBird < -700){
+    else if(sadBirdProgress <= ( 8 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad7.png"
     } 
-    if(scrollValueSadBird < -800){
+    else if(sadBirdProgress <= ( 9 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad8.png"
     } 
-    if(scrollValueSadBird < -900){
+    else if(sadBirdProgress <= ( 10 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad9.png"
     } 
-    if(scrollValueSadBird < -1000){
+    else if(sadBirdProgress <= ( 11 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad10.png"
-        console.log(rain0);
+        // console.log(rain0);
 
         if(rainRemoved){
             backgroundRain.appendChild(rain0)
@@ -187,7 +201,7 @@ addEventListener('wheel', (e) => {
             rainRemoved = false;
         }
     } 
-    if(scrollValueSadBird < -1500){
+    else if(sadBirdProgress <= ( 12 / birdImages)){
         sadPhoto.src = "assets/img/idea.jpg"
 
         if(!rainRemoved){
@@ -197,34 +211,34 @@ addEventListener('wheel', (e) => {
             rainRemoved = true;
         }
     }
-    if(scrollValueSadBird < -2000){
+    else if(sadBirdProgress <= ( 13 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing1.png"
     } 
-    if(scrollValueSadBird < -2100){
+    else if(sadBirdProgress <= ( 14 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing2.png"
     } 
-    if(scrollValueSadBird < -2200){
+    else if(sadBirdProgress <= ( 15 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing3.png"
     } 
-    if(scrollValueSadBird < -2300){
+    else if(sadBirdProgress <= ( 16 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing4.png"
     } 
-    if(scrollValueSadBird < -2400){
+    else if(sadBirdProgress <= ( 17 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing5.png"
     }
-    if(scrollValueSadBird < -2500){
+    else if(sadBirdProgress <= ( 18 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing1.png"
     } 
-    if(scrollValueSadBird < -2600){
+    else if(sadBirdProgress <= ( 19 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing2.png"
     } 
-    if(scrollValueSadBird < -2700){
+    else if(sadBirdProgress <= ( 20 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing3.png"
     } 
-    if(scrollValueSadBird < -2800){
+    else if(sadBirdProgress <= ( 21 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing4.png"
     } 
-    if(scrollValueSadBird < -2900){
+    else if(sadBirdProgress <= ( 22 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing5.png"
     }  
 })
@@ -232,7 +246,7 @@ addEventListener('wheel', (e) => {
 
 
 // Scrolling bar
-window.onscroll = function() {myFunction()};
+onscroll = function() {myFunction()};
 
 function myFunction() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -274,7 +288,6 @@ tween.add(
     })
 );
 
-const controller = new ScrollMagic.Controller();
 
 const scene = new ScrollMagic.Scene({
     triggerElement: '.animation',
@@ -287,18 +300,28 @@ const scene = new ScrollMagic.Scene({
 .addTo(controller);
 
 
+const scene1 = new ScrollMagic.Scene({
+    triggerElement: '#backgroundRain',
+    duration: 20000,
+    triggerHook: 0,
+})
+// .addIndicators()
+.setPin('#backgroundRain')
+.addTo(controller);
+
+
 
 // Change img src function
 
 var drengSolsort = document.getElementById("solsort");
-var hostname = window.location.protocol + "//" + window.location.hostname;
+var hostname = location.protocol + "//" + location.hostname;
 
 // Add port for localhost
-if (window.location.hostname === "localhost") {
+if (location.hostname === "localhost") {
   hostname += ":5500";
 }
 
-window.setInterval(changeBirdImg, 200);
+setInterval(changeBirdImg, 200);
 
 function changeBirdImg() {
     if(drengSolsort.src === hostname + "/assets/img/boy1.png"){
@@ -312,7 +335,7 @@ function changeBirdImg() {
 
 
 // Section 4
-"use strict";!function(e){"function"==typeof define&&define.amd?define(e):"undefined"!=typeof module&&module.exports?module.exports=e():window.enterView=e.call(this)}(function(){var e=function(e){function n(){g=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.msRequestAnimationFrame||function(e){return setTimeout(e,1e3/60)}}function t(){if(h&&"number"==typeof h){var e=Math.min(Math.max(0,h),1);return q-e*q}return q}function i(){var e=document.documentElement.clientHeight,n=window.innerHeight||0;q=Math.max(e,n)}function o(){y=!1;var e=t();A=A.filter(function(n){var t=n.getBoundingClientRect(),i=t.top,o=i<e;if(o&&!n.__enter_view){if(m(n),_)return!1}else!o&&n.__enter_view&&w&&w(n);return n.__enter_view=o,!0}),A.length||window.removeEventListener("scroll",r,!0)}function r(){y||(y=!0,g(o))}function u(){i(),o()}function f(e){for(var n=e.length,t=[],i=0;i<n;i+=1)t.push(e[i]);return t}function c(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:document;return"string"==typeof e?f(n.querySelectorAll(e)):e instanceof NodeList?f(e):e instanceof Array?e:void 0}function d(){A=c(l)}function a(){window.addEventListener("resize",u,!0),window.addEventListener("scroll",r,!0),u()}function s(){var e=l&&m;e||console.error("must set selector and enter options"),n(),d(),a(),o()}var l=e.selector,m=e.enter,w=e.exit,v=e.offset,h=void 0===v?0:v,p=e.once,_=void 0!==p&&p,g=null,y=!1,A=[],q=0;s()};return e});
+"use strict";!function(e){"function"==typeof define&&define.amd?define(e):"undefined"!=typeof module&&module.exports?module.exports=e():enterView=e.call(this)}(function(){var e=function(e){function n(){g=requestAnimationFrame||webkitRequestAnimationFrame||mozRequestAnimationFrame||msRequestAnimationFrame||function(e){return setTimeout(e,1e3/60)}}function t(){if(h&&"number"==typeof h){var e=Math.min(Math.max(0,h),1);return q-e*q}return q}function i(){var e=document.documentElement.clientHeight,n=innerHeight||0;q=Math.max(e,n)}function o(){y=!1;var e=t();A=A.filter(function(n){var t=n.getBoundingClientRect(),i=t.top,o=i<e;if(o&&!n.__enter_view){if(m(n),_)return!1}else!o&&n.__enter_view&&w&&w(n);return n.__enter_view=o,!0}),A.length||removeEventListener("scroll",r,!0)}function r(){y||(y=!0,g(o))}function u(){i(),o()}function f(e){for(var n=e.length,t=[],i=0;i<n;i+=1)t.push(e[i]);return t}function c(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:document;return"string"==typeof e?f(n.querySelectorAll(e)):e instanceof NodeList?f(e):e instanceof Array?e:void 0}function d(){A=c(l)}function a(){addEventListener("resize",u,!0),addEventListener("scroll",r,!0),u()}function s(){var e=l&&m;e||console.error("must set selector and enter options"),n(),d(),a(),o()}var l=e.selector,m=e.enter,w=e.exit,v=e.offset,h=void 0===v?0:v,p=e.once,_=void 0!==p&&p,g=null,y=!1,A=[],q=0;s()};return e});
 enterView({
     selector: 'section',
     enter: function(el) {
@@ -332,10 +355,10 @@ vid.addEventListener('loadedmetadata', function() {
 
 // Use requestAnimationFrame for smooth playback
 function scrollPlay(){  
-// var frameNumber  = window.pageYOffset/playbackConst;
+// var frameNumber  = pageYOffset/playbackConst;
 var frameNumber  = birdTrackFrames/playbackConst;
 vid.currentTime  = frameNumber;
-window.requestAnimationFrame(scrollPlay);
+requestAnimationFrame(scrollPlay);
 }
 
 
