@@ -325,12 +325,12 @@ p {
 
 
 /* Section 7 */
-
+/* 
 #seventhSection{
 	overflow: hidden;
 	width: 100vw;
 	height: 100vh;
-}
+} */
 
 #backgroundRain{
 	/* background-image: url("assets/img/sadBird/sad0.jpg");
@@ -452,4 +452,8 @@ body.splat-toggle .splat {
 	top: 30%;
 	left: 60%;
 	z-index: 10;
+}
+
+#eighthSection{
+	height: 10vh;
 }
