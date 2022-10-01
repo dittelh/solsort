@@ -271,7 +271,8 @@ p {
 
 #fourthSection{
 	position: relative;
-	height: 120vh;
+	/* height: 120vh; */
+	height: 100vh;
 }
 
 #fourthSectionFacts{

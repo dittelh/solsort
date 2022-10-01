@@ -109,22 +109,26 @@ addEventListener('wheel', (e) => {
     
     // console.log(scrollY)
     // Bird tracks
-    if(birdTrackFrames > 7100 && scrollY > 8200){
-        body.style.overflowY = "unset";
-        birdTrackFrames = 7099;
-    }
-    else if(birdTrackFrames < -10 && scrollY > 8200) {
-        body.style.overflowY = "unset";
-        birdTrackFrames = 1;
-    }
-    else if(scrollY > 8200 && scrollY < 8500 && birdTrackFrames < 7100){
-        body.style.overflowY = "hidden";
-        birdTrackFrames += e.wheelDelta - (e.wheelDelta + e.wheelDelta);
-        requestAnimationFrame(scrollPlay);
-    }
-    if(scrollY < 8000){
-        birdTrackFrames = 1;
-    }
+    // if(birdTrackFrames > 7100 && scrollY > 8200){
+    //     body.style.overflowY = "unset";
+    //     birdTrackFrames = 7099;
+    // }
+    // else if(birdTrackFrames < -10 && scrollY > 8200) {
+    //     body.style.overflowY = "unset";
+    //     birdTrackFrames = 1;
+    // }
+    // else if(scrollY > 8200 && scrollY < 8500 && birdTrackFrames < 7100){
+    //     body.style.overflowY = "hidden";
+    //     birdTrackFrames += e.wheelDelta - (e.wheelDelta + e.wheelDelta);
+    //     requestAnimationFrame(scrollPlay);
+    // }
+    // if(scrollY < 8000){
+    //     birdTrackFrames = 1;
+    // }
+
+    // Bird Tracks
+    requestAnimationFrame(scrollPlay);
+
     
 
 
@@ -136,32 +140,19 @@ addEventListener('wheel', (e) => {
 
     // Section 7 - img change
 
-    // console.log(isElementInViewport(sadPhoto));
     if(rain0 === ""){
         rain0 = document.getElementsByClassName("rain")[0]
         rain1 = document.getElementsByClassName("rain")[1]
     }
 
-    var sadBirdProgress = scene1.progress();
-    console.log(sadBirdProgress)
+    var sadBirdProgress = sadBirdScene.progress();
 
+    // Amount if different images in this scene
     birdImages = 22;
 
-
-    // if(scrollY > 9245 && scrollValueSadBird <= 0){
-    //     scrollValueSadBird += e.wheelDelta;
-    //     // body.style.overflowY = "hidden";
-    // } else if(scrollValueSadBird > 0) {
-    //     scrollValueSadBird = 0;
-    //     // body.style.overflowY = "unset";
-    //     sadPhoto.src = "assets/img/sadBird/sad0.png"
-    // }
-    
     if(sadBirdProgress <= ( 1 / birdImages)){
-        console.log("sad0")
         sadPhoto.src = "assets/img/sadBird/sad0.png";
     }
-    
     else if(sadBirdProgress <= ( 2 / birdImages)){
         console.log("sad1")
         sadPhoto.src = "assets/img/sadBird/sad1.png"
@@ -260,12 +251,8 @@ function myFunction() {
 
 
 // Section 3
-
 const flightPath = {
-
-
     curviness: 1.25,
-    // autoRotate: true,
     values: [
     {x: -100, y: -70},
     {x: -200, y: -50},
@@ -280,7 +267,6 @@ const flightPath = {
 };
 
 const tween = new TimelineLite();
-
 tween.add(
     TweenLite.to('#solsort', 1, {
         bezier: flightPath,
@@ -288,8 +274,7 @@ tween.add(
     })
 );
 
-
-const scene = new ScrollMagic.Scene({
+const flyBirdScene = new ScrollMagic.Scene({
     triggerElement: '.animation',
     duration: 3000,
     triggerHook: 0,
@@ -297,16 +282,6 @@ const scene = new ScrollMagic.Scene({
 .setTween(tween)
 // .addIndicators()
 .setPin('.animation')
-.addTo(controller);
-
-
-const scene1 = new ScrollMagic.Scene({
-    triggerElement: '#backgroundRain',
-    duration: 20000,
-    triggerHook: 0,
-})
-// .addIndicators()
-.setPin('#backgroundRain')
 .addTo(controller);
 
 
@@ -355,11 +330,20 @@ vid.addEventListener('loadedmetadata', function() {
 
 // Use requestAnimationFrame for smooth playback
 function scrollPlay(){  
-// var frameNumber  = pageYOffset/playbackConst;
-var frameNumber  = birdTrackFrames/playbackConst;
-vid.currentTime  = frameNumber;
-requestAnimationFrame(scrollPlay);
+const birdTrackProgress = birdTracksScene.progress()
+vid.currentTime = 15 * birdTrackProgress;
+console.log(15 * birdTrackProgress)
 }
+
+// Scroll Magic
+const birdTracksScene = new ScrollMagic.Scene({
+    triggerElement: '#fourthSection',
+    duration: 3000,
+    triggerHook: 0,
+})
+// .addIndicators()
+.setPin('#fourthSection')
+.addTo(controller);
 
 
 
@@ -392,6 +376,19 @@ function playSound(){
     var music = new Audio('assets/img/birdsong.mp3');
     music.play();
 }
+
+// Scroll Magic
+const sadBirdScene = new ScrollMagic.Scene({
+    triggerElement: '#backgroundRain',
+    duration: 15000,
+    triggerHook: 0,
+})
+// .addIndicators()
+.setPin('#backgroundRain')
+.addTo(controller);
+
+
+
 
 
 
