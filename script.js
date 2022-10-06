@@ -7,6 +7,7 @@ var secondSectionValue = 0;
 var blackBoxValue = 0.8;
 var birdTrackFrames = 0;
 var scrollValueSadBird = 0;
+var letterScrollValue = 0;
 
 // Get document elements
 var leafLeft = document.getElementById("leafLeft");
@@ -16,12 +17,18 @@ var nestImg = document.getElementById("nest");
 var secondSection = document.getElementById("secondSection");
 var blackBox = document.getElementById("blackBox");
 var vid = document.getElementById('v0'); 
+var vidCouples = document.getElementById('v1'); 
 var sadPhoto = document.getElementById("sadBird");
 var backgroundRain = document.getElementById("backgroundRain");
 var body = document.body;
 var rain0 = "";
 var rain1 = "";
 var rainRemoved = false;
+var solsort = document.getElementById("solsort");
+var girlInlove = document.getElementById("girlInlove");
+var girl = document.getElementById("solsortHun");
+var solsort1 = document.getElementById("solsort1");
+
 
 // ScrollMagic
 const controller = new ScrollMagic.Controller();
@@ -35,7 +42,7 @@ body.style.overflowY = "hidden";
 
 // Do something when scrolling
 addEventListener('wheel', (e) => {
-    
+
     // Get scroll value from event
     scrollValue += e.wheelDelta
 
@@ -83,13 +90,7 @@ addEventListener('wheel', (e) => {
         nestImg.src = "assets/img/nest.png"
     } 
 
-    // Second section opacity
-    // if(scrollValue < -3500){
-    //     scrollValue < scrollValueBefore ? secondSectionValue += 0.2 : secondSectionValue -= 0.2;
-    //     secondSection.style.opacity = secondSectionValue
-    // } else {
-    //     secondSectionValue = 0;
-    // }
+    
 
 
 
@@ -101,33 +102,11 @@ addEventListener('wheel', (e) => {
     }
 
 
-    // let videoTop = vid.offsetTop;
-    // let videoBottom = vid.offsetTop + vid.offsetHeight;
-    // console.log(videoTop);
-    // console.log(videoBottom)
-    // console.log(scrollY)
-    
-    // console.log(scrollY)
-    // Bird tracks
-    // if(birdTrackFrames > 7100 && scrollY > 8200){
-    //     body.style.overflowY = "unset";
-    //     birdTrackFrames = 7099;
-    // }
-    // else if(birdTrackFrames < -10 && scrollY > 8200) {
-    //     body.style.overflowY = "unset";
-    //     birdTrackFrames = 1;
-    // }
-    // else if(scrollY > 8200 && scrollY < 8500 && birdTrackFrames < 7100){
-    //     body.style.overflowY = "hidden";
-    //     birdTrackFrames += e.wheelDelta - (e.wheelDelta + e.wheelDelta);
-    //     requestAnimationFrame(scrollPlay);
-    // }
-    // if(scrollY < 8000){
-    //     birdTrackFrames = 1;
-    // }
+ 
 
     // Bird Tracks
-    requestAnimationFrame(scrollPlay);
+    requestAnimationFrame(scrollPlayBirdTracks);
+    requestAnimationFrame(scrollPlayCouples);
 
     
 
@@ -148,7 +127,8 @@ addEventListener('wheel', (e) => {
     var sadBirdProgress = sadBirdScene.progress();
 
     // Amount if different images in this scene
-    var birdImages = 22;
+    // var birdImages = 22;
+    var birdImages = 44;
 
     if(sadBirdProgress <= ( 1 / birdImages)){
         sadPhoto.src = "assets/img/sadBird/sad0.png";
@@ -232,6 +212,33 @@ addEventListener('wheel', (e) => {
     else if(sadBirdProgress <= ( 22 / birdImages)){
         sadPhoto.src = "assets/img/singing/singing5.png"
     }  
+
+    if(sadBirdProgress <= ( 11 / birdImages)){
+
+        if(rainRemoved){
+            backgroundRain.appendChild(rain0)
+            backgroundRain.appendChild(rain1)
+
+            rainRemoved = false;
+        }
+    } 
+    else{
+
+        if(!rainRemoved){
+            rain0.remove();
+            rain1.remove();
+
+            rainRemoved = true;
+        }
+    }
+
+    
+// if(scrollY >22000){
+//     letterScrollValue -= e.wheelDelta;
+//     console.log(letterScrollValue)
+//     transformLetters(letterScrollValue);
+// }
+
 })
 
 
@@ -261,10 +268,11 @@ const flightPath = {
     {x:-1100, y: 100},
     {x:-1300, y: -115},
     {x:-1600, y: 175},
-    {x: -1930, y: -200},
+    {x: -innerWidth - solsort.width, y: -200},
     ]
 
 };
+
 
 const tween = new TimelineLite();
 tween.add(
@@ -329,10 +337,9 @@ vid.addEventListener('loadedmetadata', function() {
 
 
 // Use requestAnimationFrame for smooth playback
-function scrollPlay(){  
+function scrollPlayBirdTracks(){  
 const birdTrackProgress = birdTracksScene.progress()
 vid.currentTime = 15 * birdTrackProgress;
-console.log(15 * birdTrackProgress)
 }
 
 // Scroll Magic
@@ -350,7 +357,6 @@ const birdTracksScene = new ScrollMagic.Scene({
 
 // Section 7
 // Rain https://codepen.io/arickle/pen/XKjMZY d. 28/9-22
-
 
 var increment = 0;
 var drops = "";
@@ -377,17 +383,156 @@ function playSound(){
     music.play();
 }
 
+// Bird inlove fly in
+const inloveFlightpath = {
+    curviness: 1.25,
+    values: [
+        {x:0, y: 0},
+        {x:1, y: 0},
+        {x:2, y: 0},
+        {x:3, y: 0},
+        {x:4, y: 0},
+        {x:5, y: 0},
+        {x:6, y: 0},
+        {x:7, y: 0},
+        {x:30, y: 0},
+        {x:60, y: 0},
+        {x:90, y: 0},
+        {x:120, y: 0},
+        {x:150, y: 100},
+        {x:200, y: 200},
+        {x:(innerWidth + girlInlove.width) / 2.3, y: 160},
+    ]
+};
+
+const inloveTween = new TimelineLite();
+inloveTween.add(
+    TweenLite.to('#girlInlove', 1, {
+        bezier: inloveFlightpath,
+        ease: Power1.easeInOut
+    })
+);
+
+
 // Scroll Magic
 const sadBirdScene = new ScrollMagic.Scene({
-    triggerElement: '#backgroundRain',
-    duration: 15000,
+    triggerElement: '#seventhSection',
+    duration: 10000,
     triggerHook: 0,
 })
 // .addIndicators()
-.setPin('#backgroundRain')
+.setTween(inloveTween)
+.setPin('#seventhSection')
 .addTo(controller);
 
 
+// Change img src function
+setInterval(changeGirlInloveImg, 200);
+
+function changeGirlInloveImg() {
+    if(girlInlove.src === hostname + "/assets/img/birdGirlInlove/Animation_Solsort_Pige_Love-1.png"){
+        girlInlove.src = hostname + "/assets/img/birdGirlInlove/Animation_Solsort_Pige_Love-2.png"
+    } else{
+        girlInlove.src = hostname + "/assets/img/birdGirlInlove/Animation_Solsort_Pige_Love-1.png"
+    }
+    
+}
+
+
+
+// Section 8 
+
+const span0 = document.getElementsByClassName("span0")[0]
+const span1 = document.getElementsByClassName("span1")[0]
+const span2 = document.getElementsByClassName("span2")[0]
+const span3 = document.getElementsByClassName("span3")[0]
+const span4 = document.getElementsByClassName("span4")[0]
+const span5 = document.getElementsByClassName("span5")[0]
+const span6 = document.getElementsByClassName("span6")[0]
+const span7 = document.getElementsByClassName("span7")[0]
+const span8 = document.getElementsByClassName("span8")[0]
+const span9 = document.getElementsByClassName("span9")[0]
+const span10 = document.getElementsByClassName("span10")[0]
+const span11 = document.getElementsByClassName("span11")[0]
+const span12 = document.getElementsByClassName("span12")[0]
+const span13 = document.getElementsByClassName("span13")[0]
+const span14 = document.getElementsByClassName("span14")[0]
+const span15 = document.getElementsByClassName("span15")[0]
+const span16 = document.getElementsByClassName("span16")[0]
+const span17 = document.getElementsByClassName("span17")[0]
+const span18 = document.getElementsByClassName("span18")[0]
+const span19 = document.getElementsByClassName("span19")[0]
+const span20 = document.getElementsByClassName("span20")[0]
+const span21 = document.getElementsByClassName("span21")[0]
+const span22 = document.getElementsByClassName("span22")[0]
+const span23 = document.getElementsByClassName("span23")[0]
+const span24 = document.getElementsByClassName("span24")[0]
+const span25 = document.getElementsByClassName("span25")[0]
+const span26 = document.getElementsByClassName("span26")[0]
+
+function transformLetters(scroll) {
+  // console.log({AmountScrolled: scroll});
+  
+  span0.style.transform = `translate3d(0, ${scroll*1.4}px, 0) rotateY(${-scroll*0.03}deg)`;
+
+  span1.style.transform = `translate3d(0, ${scroll*1.4}px, 0) rotateY(${-scroll*0.03}deg)`;
+   
+  span2.style.transform = `translate3d(${-scroll*0.45}px, ${scroll*0.95}px, 0) rotate(${-scroll*0.1}deg)`;
+  
+  span3.style.transform = `translate3d(${scroll*0.65}px, ${scroll*1.05}px, 0) rotate(${scroll*0.2}deg)`;
+  
+  span4.style.transform = `translate3d(0, ${scroll*0.5}px, 0) rotateY(${scroll*0.04}deg)`;
+}
+
+
+
+
+
+
+// Section 9
+
+
+
+
+// Use requestAnimationFrame for smooth playback
+function scrollPlayCouples(){  
+    const couplesProgress = couplesScene.progress()
+    vidCouples.currentTime = 10 * couplesProgress;
+    }
+    
+    // Scroll Magic
+    const couplesScene = new ScrollMagic.Scene({
+        triggerElement: '#ninthSection',
+        duration: 10000,
+        triggerHook: 0,
+    })
+    // .addIndicators()
+    .setPin('#ninthSection')
+    .addTo(controller);
+
+// Change img src function
+setInterval(changeSolsort1Img, 200);
+
+function changeSolsort1Img() {
+    if(solsort1.src === hostname + "/assets/img/boy1.png"){
+        solsort1.src = hostname + "/assets/img/boy2.png"
+    } else{
+        solsort1.src = hostname + "/assets/img/boy1.png"
+    }
+    
+}
+
+// Change img src function
+setInterval(changeGirlImg, 200);
+
+function changeGirlImg() {
+    if(girl.src === hostname + "/assets/img/dameAni/Animation_Solsort_Pige-1.png"){
+        girl.src = hostname + "/assets/img/dameAni/Animation_Solsort_Pige-2.png"
+    } else{
+        girl.src = hostname + "/assets/img/dameAni/Animation_Solsort_Pige-1.png"
+    }
+    
+}
 
 
 
@@ -399,58 +544,3 @@ const sadBirdScene = new ScrollMagic.Scene({
 
 
 
-
-
-
-// LottieInteractivity.create({
-//     mode: "scroll",
-//     player: "#birdsfeet",
-//     actions: [
-//         {
-//             visibility:[0,1],
-//             type: "seek",
-//             frames: [0,444],
-//         },
-//     ]
-// });
-
-// https://greensock.com/docs/v3/HelperFunctions#lottie d. 26/9-22
-
-// function LottieScrollTrigger(vars) {
-// 	let playhead = {frame: 0},
-// 		target = gsap.utils.toArray(vars.target)[0],
-// 		speeds = {slow: "+=3000", medium: "+=1000", fast: "+=500"},
-// 		st = {trigger: target, pin: true, start: "top top", end: speeds[vars.speed] || "+=500", scrub: 1},
-// 		animation = lottie.loadAnimation({
-// 			container: target,
-// 			renderer: vars.renderer || "svg",
-// 			loop: false,
-// 			autoplay: false,
-// 			path: vars.path
-// 		});
-// 	for (let p in vars) { // let users override the ScrollTrigger defaults
-// 		st[p] = vars[p];
-// 	}
-// 	animation.addEventListener("DOMLoaded", function() {
-// 		gsap.to(playhead, {
-//       duration: vars.duration || 0.5,
-//       delay: vars.delay || 0,
-// 			frame: animation.totalFrames - 1,
-// 			ease: vars.ease || "none",
-// 			onUpdate: () => animation.goToAndStop(playhead.frame, true),
-// 			scrollTrigger: st
-// 		});
-//     // in case there are any other ScrollTriggers on the page and the loading of this Lottie asset caused layout changes
-//     ScrollTrigger.sort();
-//     ScrollTrigger.refresh(); 
-// 	});
-//   return animation;
-// }
-
-// LottieScrollTrigger({
-//     target: "#birdsfeet",
-//     path: "https://lottie.host/fcbb3ebf-aece-45ee-bfa2-469f1643bed1/efYoTgZMmR.json",
-//     speed: "slow",
-//     scrub: 2 // seconds it takes for the playhead to "catch up"
-//     // you can also add ANY ScrollTrigger values here too, like trigger, start, end, onEnter, onLeave, onUpdate, etc. See https://greensock.com/docs/v3/Plugins/ScrollTrigger
-//    });
