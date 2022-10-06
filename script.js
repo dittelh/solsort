@@ -84,12 +84,12 @@ addEventListener('wheel', (e) => {
     } 
 
     // Second section opacity
-    if(scrollValue < -3600){
-        scrollValue < scrollValueBefore ? secondSectionValue += 0.2 : secondSectionValue -= 0.2;
-        secondSection.style.opacity = secondSectionValue
-    } else {
-        secondSectionValue = 0;
-    }
+    // if(scrollValue < -3500){
+    //     scrollValue < scrollValueBefore ? secondSectionValue += 0.2 : secondSectionValue -= 0.2;
+    //     secondSection.style.opacity = secondSectionValue
+    // } else {
+    //     secondSectionValue = 0;
+    // }
 
 
 
