@@ -325,20 +325,17 @@ p {
 
 
 /* Section 7 */
-/* 
+ 
 #seventhSection{
-	overflow: hidden;
-	width: 100vw;
+	/* overflow: hidden; */
+	/* width: 100vw; */
 	height: 100vh;
-} */
+} 
 
 #backgroundRain{
-	/* background-image: url("assets/img/sadBird/sad0.jpg");
-	background-size: cover;
-	height: 100vh;
-	z-index: 0;
-	position: relative; */
-	position: relative;
+	/* position: relative;
+	z-index: 1;
+	overflow: hidden; */
 }
 
 #sadBird{
@@ -376,6 +373,14 @@ p {
   
 body.back-row-toggle .rain.back-row {
 	display: block;
+}
+
+#girlInlove {
+	width: 30%;
+	position: absolute;
+	top: 10%; 
+	left: -25%;
+	z-index: 2;
 }
   
 @keyframes drop {
@@ -455,5 +460,52 @@ body.splat-toggle .splat {
 }
 
 #eighthSection{
-	height: 10vh;
+	height: 100vh;
+	display: flex;
+	padding-left: 30%;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#eighthSection h2{
+	display: flex;
+}
+
+#eighthSection p{
+	display: flex;
+	font-size: 20px;
+}
+
+
+
+/* ninth Section */
+
+#ninthSection{
+	width: 300vw;
+}
+
+#threeScreens{
+	height: 100vh;
+	position: relative;
+}
+#solsort1{
+	width: 30vw;
+	height: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: scaleX(-1) !important;
+}
+#solsortHun{
+	width: 30vw;
+	height: auto;
+	position: absolute;
+	top: 20%;
+	left: 0;
+	transform: scaleX(-1) !important;
+}
+#v1 {
+	height: 100vh;
+	width: 100vw;
+	object-fit: cover;
 }
